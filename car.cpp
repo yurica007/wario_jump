@@ -2,10 +2,17 @@
 #include "game.h"
 #include "car.h"
 
+namespace
+{
+	constexpr int kWaitFrameMin = 30;
+	constexpr int kWaitFrameMax = 300;
+}
+
 Car::Car()
 {
 	m_handle = -1;
 	m_fieldY = 0.0f;
+	m_waitFrame = 0;
 }
 
 void Car::setGraphic(int handle)
@@ -22,10 +29,18 @@ void Car::setup(float fieldY)
 
 	m_vec.x = -16.0f;
 	m_vec.y = 0.0f;
+
+	// “®‚«Žn‚ß‚é‚Ü‚Å‚ÌŽžŠÔ‚ðÝ’è 1~3•b‘Ò‚Â 60~180f
+	m_waitFrame = GetRand(kWaitFrameMin) + kWaitFrameMin;
 }
 
 void Car::update()
 {
+	if (m_waitFrame > 0)
+	{
+		m_waitFrame--;
+		return;
+	}
 	m_pos += m_vec;
 }
 
