@@ -44,10 +44,32 @@ void Car::update()
 		m_waitFrame--;
 		return;
 	}
-	m_pos += m_vec;
+	updateNomal();
 }
 
 void Car::draw()
 {
 	DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
+}
+/*private*/
+
+// まっすぐ進む
+void Car::updateNomal()
+{
+	m_pos += m_vec;
+}
+// 一時停止フェイント
+void Car::updateStop()
+{
+
+}
+// ジャンプする
+void Car::updateJump()
+{
+
+}
+// 途中で引き返す
+void Car::updateReturn()
+{
+
 }
