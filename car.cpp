@@ -33,7 +33,26 @@ void Car::setup(float fieldY)
 	m_vec.x = kSpeed;
 	m_vec.y = 0.0f;
 
-	// 動き始めるまでの時間を設定 1~3秒待つ 60~180f
+	// 動きのバリエーションを選択
+	int randNum = GetRand(99);
+	if (randNum < 38)
+	{
+		m_moveType = kMoveTypeNormal;
+	}
+	else if (randNum < 68)
+	{
+		m_moveType = kMoveTypeStop;
+	}
+	else if (randNum < 98)
+	{
+		m_moveType = kMoveTypeJump;
+	}
+	else
+	{
+		m_moveType = kMoveTypeReturn;
+	}
+
+	// 動き始めるまでの時間を設定
 	m_waitFrame = GetRand(kWaitFrameMin) + kWaitFrameMin;
 }
 
@@ -44,7 +63,25 @@ void Car::update()
 		m_waitFrame--;
 		return;
 	}
-	updateNomal();
+
+	switch (m_moveType)
+	{
+	case kMoveTypeNormal:
+		updateNormal();
+		break;
+	case kMoveTypeStop:
+		updateStop();
+		break;
+	case kMoveTypeJump:
+		updateJump();
+		break;
+	case kMoveTypeReturn:
+		updateReturn();
+		break;
+	default:
+		updateNormal();
+		break;
+	}
 }
 
 void Car::draw()
@@ -54,22 +91,22 @@ void Car::draw()
 /*private*/
 
 // まっすぐ進む
-void Car::updateNomal()
+void Car::updateNormal()
 {
 	m_pos += m_vec;
 }
 // 一時停止フェイント
 void Car::updateStop()
 {
-
+	m_pos += m_vec;
 }
 // ジャンプする
 void Car::updateJump()
 {
-
+	m_pos += m_vec;
 }
 // 途中で引き返す
 void Car::updateReturn()
 {
-
+	m_pos += m_vec;
 }
