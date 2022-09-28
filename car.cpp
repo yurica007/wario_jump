@@ -99,11 +99,30 @@ void Car::updateNormal()
 void Car::updateStop()
 {
 	m_pos += m_vec;
+	if (m_pos.x <= Game::kScreenWidth - 200.0f)
+	{
+
+	}
 }
 // ƒWƒƒƒ“ƒv‚·‚é
 void Car::updateJump()
 {
 	m_pos += m_vec;
+	bool isField = false;
+	if (m_pos.y > m_fieldY - m_size.y)
+	{
+		m_pos.y = m_fieldY - m_size.y;
+		isField = true;
+	}
+
+	if (m_pos.x <= Game::kScreenWidth - 200.0f)
+	{
+		if (isField)
+		{
+			m_vec.y = -21.0f;
+		}
+	}
+	m_vec.y += 1.0f;
 }
 // “r’†‚Åˆø‚«•Ô‚·
 void Car::updateReturn()
