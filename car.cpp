@@ -8,7 +8,7 @@ namespace
 	constexpr int kWaitFrameMin = 30;
 	constexpr int kWaitFrameMax = 300;
 	// ŽÔ‚Ì‘¬“x
-	constexpr float kSpeed = -24.0f;
+	constexpr float kSpeed = -17.0f;
 }
 
 Car::Car()
