@@ -4,8 +4,11 @@
 
 namespace
 {
+	// ‘Ò‚¿ŠÔ
 	constexpr int kWaitFrameMin = 30;
 	constexpr int kWaitFrameMax = 300;
+	// Ô‚Ì‘¬“x
+	constexpr float kSpeed = -24.0f;
 }
 
 Car::Car()
@@ -27,7 +30,7 @@ void Car::setup(float fieldY)
 	m_pos.x = Game::kScreenWidth + 16.0f;
 	m_pos.y = m_fieldY - m_size.y;
 
-	m_vec.x = -16.0f;
+	m_vec.x = kSpeed;
 	m_vec.y = 0.0f;
 
 	// “®‚«n‚ß‚é‚Ü‚Å‚ÌŠÔ‚ğİ’è 1~3•b‘Ò‚Â 60~180f
