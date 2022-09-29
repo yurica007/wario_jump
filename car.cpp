@@ -9,6 +9,12 @@ namespace
 	constexpr int kWaitFrameMax = 300;
 	// 車の速度
 	constexpr float kSpeed = -17.0f;
+	// 車の行動場所
+	constexpr float kActArea = Game::kScreenWidth - 200.0f;
+	// 車のジャンプ力
+	constexpr float kJumpAcc = -21.0f;
+	// 車の重力
+	constexpr float kGravity = 1.0f;
 }
 
 Car::Car()
@@ -54,6 +60,8 @@ void Car::setup(float fieldY)
 
 	// 動き始めるまでの時間を設定
 	m_waitFrame = GetRand(kWaitFrameMin) + kWaitFrameMin;
+	// 再度動き始めるまでの時間を設定
+	m_againWaitFrame = GetRand(kWaitFrameMin) + kWaitFrameMin;;
 }
 
 void Car::update()
@@ -63,6 +71,9 @@ void Car::update()
 		m_waitFrame--;
 		return;
 	}
+
+// デバッグ
+	m_moveType = kMoveTypeReturn;
 
 	switch (m_moveType)
 	{
@@ -98,11 +109,19 @@ void Car::updateNormal()
 // 一時停止フェイント
 void Car::updateStop()
 {
-	m_pos += m_vec;
-	if (m_pos.x <= Game::kScreenWidth - 200.0f)
+	if (m_pos.x < kActArea)
 	{
-
+		if (m_againWaitFrame > 0)
+		{
+			m_againWaitFrame--;
+			m_vec.x = 0.0f;
+		}
+		else
+		{
+			m_vec.x = kSpeed;
+		}
 	}
+	m_pos += m_vec;
 }
 // ジャンプする
 void Car::updateJump()
@@ -115,17 +134,29 @@ void Car::updateJump()
 		isField = true;
 	}
 
-	if (m_pos.x <= Game::kScreenWidth - 200.0f)
+	if (m_pos.x < kActArea)
 	{
 		if (isField)
 		{
-			m_vec.y = -21.0f;
+			m_vec.y = kJumpAcc;
 		}
 	}
-	m_vec.y += 1.0f;
+	m_vec.y += kGravity;
 }
 // 途中で引き返す
 void Car::updateReturn()
 {
+	if (m_pos.x < kActArea)
+	{
+		if (m_againWaitFrame > 0)
+		{
+			m_againWaitFrame--;
+			m_vec.x = 0.0f;
+		}
+		else
+		{	
+			m_vec.x = kSpeed;
+		}
+	}
 	m_pos += m_vec;
 }

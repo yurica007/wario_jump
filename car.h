@@ -34,7 +34,7 @@ private:
 		kMoveTypeReturn,
 
 		kMoveTypeNum
-	}MoveType;
+	};
 
 private:
 	void updateNormal();		// まっすぐ進む
@@ -53,6 +53,8 @@ private:
 
 	// 移動開始までの待ち時間
 	int m_waitFrame;
+	// 再度移動開始までの待ち時間
+	int m_againWaitFrame;
 
 	// 位置
 	Vec2 m_pos;
