@@ -34,7 +34,7 @@ private:
 		kMoveTypeReturn,
 
 		kMoveTypeNum
-	};
+	}MoveType;
 
 private:
 	void updateNormal();		// ‚Ü‚Á‚·‚®i‚Ş

@@ -4,13 +4,20 @@
 
 namespace
 {
+	// 直進する確率
+	constexpr int kStraightProb = 40;
+	// フェイント行動をする確率
+	constexpr int kStopProb = 29;
+	// ジャンプする確率
+	constexpr int kJumpProb = 30;
+
 	// 待ち時間
 	constexpr int kWaitFrameMin = 30;
 	constexpr int kWaitFrameMax = 300;
 	// 車の速度
 	constexpr float kSpeed = -17.0f;
 	// 車の行動場所
-	constexpr float kActArea = Game::kScreenWidth - 200.0f;
+	constexpr float kActArea = Game::kScreenWidth - 275.0f;
 	// 車のジャンプ力
 	constexpr float kJumpAcc = -21.0f;
 	// 車の重力
@@ -41,15 +48,15 @@ void Car::setup(float fieldY)
 
 	// 動きのバリエーションを選択
 	int randNum = GetRand(99);
-	if (randNum < 38)
+	if (randNum < kStraightProb)
 	{
 		m_moveType = kMoveTypeNormal;
 	}
-	else if (randNum < 68)
+	else if (randNum < kStraightProb + kStopProb)
 	{
 		m_moveType = kMoveTypeStop;
 	}
-	else if (randNum < 98)
+	else if (randNum < kStraightProb + kStopProb + kJumpProb)
 	{
 		m_moveType = kMoveTypeJump;
 	}
