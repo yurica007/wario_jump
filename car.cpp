@@ -154,8 +154,15 @@ void Car::updateReturn()
 			m_vec.x = 0.0f;
 		}
 		else
-		{	
-			m_vec.x = kSpeed;
+		{
+			if (m_pos.x > kActArea)
+			{
+				m_vec.x = kSpeed;
+			}
+			else
+			{
+				m_vec.x = -kSpeed;
+			}
 		}
 	}
 	m_pos += m_vec;
