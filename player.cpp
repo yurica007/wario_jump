@@ -67,11 +67,11 @@ void Player::draw()
 {
 	if (m_isDead)
 	{
-		DrawRectGraph(m_pos.x, m_pos.y, m_graphSize.x / 2, 0, m_graphSize.x / 2, m_graphSize.y, m_handle, false, false);
+		DrawRectGraph(m_pos.x, m_pos.y, 128, 0, 128, 128, m_handle, false, false);
 	}
 	else
 	{
-		DrawRectGraph(m_pos.x, m_pos.y, 0, 0, m_graphSize.x / 2, m_graphSize.y, m_handle, false, false);
+		DrawRectGraph(m_pos.x, m_pos.y, 0, 0, 128, 128, m_handle, false, false);
 	}
 
 }

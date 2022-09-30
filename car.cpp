@@ -80,7 +80,7 @@ void Car::update()
 	}
 
 // デバッグ
-	m_moveType = kMoveTypeReturn;
+//	m_moveType = kMoveTypeReturn;
 
 	switch (m_moveType)
 	{
